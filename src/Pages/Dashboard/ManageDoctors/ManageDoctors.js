@@ -40,13 +40,13 @@ const ManageDoctors = () => {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.deletedCount > 0){
-                refetch();
-                toast.success(`Doctor ${doctor.name} deleted successfully`);
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`Doctor ${doctor.name} deleted successfully`);
+                }
+            })
     }
 
 

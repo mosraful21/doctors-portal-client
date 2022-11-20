@@ -3,8 +3,8 @@ import chair from '../../../assets/images/chair.png';
 import appointment from '../../../assets/images/bg.png';
 import { DayPicker } from 'react-day-picker';
 
-const AppointmentBanner = ({selectedDate, setSelectedDate}) => {
-    
+const AppointmentBanner = ({ selectedDate, setSelectedDate }) => {
+
     return (
         <header className='my-6' style={{
             background: `url(${appointment})`

@@ -17,7 +17,7 @@ const AvailableAppointments = ({ selectedDate }) => {
         }
     });
 
-    if(isLoading){
+    if (isLoading) {
         return <Loading></Loading>
     }
 

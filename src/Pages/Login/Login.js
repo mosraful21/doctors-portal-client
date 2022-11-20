@@ -21,17 +21,15 @@ const Login = () => {
     }
 
     const handleLogin = data => {
-        console.log(data);
         setLoginError('');
         signIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                // console.log(user);
                 setLoginUserEmail(data.email);
                 toast.success('Login Successfully.')
             })
             .catch(error => {
-                console.log(error.message)
                 setLoginError(error.message);
             });
     }

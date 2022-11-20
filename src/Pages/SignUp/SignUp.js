@@ -14,7 +14,7 @@ const SignUp = () => {
     const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
 
-    if(token){
+    if (token) {
         navigate('/');
     }
 
@@ -23,7 +23,7 @@ const SignUp = () => {
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                // console.log(user);
                 toast.success('User Created Successfully.')
                 const userInfo = {
                     displayName: data.name
@@ -35,8 +35,7 @@ const SignUp = () => {
                     .catch(err => console.log(err));
             })
             .catch(error => {
-                console.log(error)
-                setSignUPError(error.message)
+                setSignUPError(error.message);
             });
     }
 

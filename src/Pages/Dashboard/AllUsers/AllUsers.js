@@ -22,7 +22,7 @@ const AllUsers = () => {
         })
             .then(res => res.json())
             .then(data => {
-                if(data.modifiedCount > 0){
+                if (data.modifiedCount > 0) {
                     toast.success('Make Admin Successfully');
                     refetch();
                 }
