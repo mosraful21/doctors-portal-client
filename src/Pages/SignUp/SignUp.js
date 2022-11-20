@@ -22,7 +22,7 @@ const SignUp = () => {
         setSignUPError('');
         createUser(data.email, data.password)
             .then(result => {
-                const user = result.user;
+                // const user = result.user;
                 // console.log(user);
                 toast.success('User Created Successfully.')
                 const userInfo = {
