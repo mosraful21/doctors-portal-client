@@ -11,7 +11,7 @@ const CheckoutForm = ({ booking }) => {
 
     const stripe = useStripe();
     const elements = useElements();
-    const { price, email, patient } = booking;
+    const { price, email, patient, _id } = booking;
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -51,7 +51,7 @@ const CheckoutForm = ({ booking }) => {
 
         setSuccess('');
         setProcessing(true);
-        const {paymentIntent, error: confirmError} = await stripe.confirmCardPayment(
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
             clientSecret,
             {
                 payment_method: {
@@ -63,14 +63,33 @@ const CheckoutForm = ({ booking }) => {
                 },
             },
         );
-        if(confirmError){
+        if (confirmError) {
             setCardError(confirmError.message);
             return;
         }
-        if(paymentIntent.status === 'succeeded'){
-            setSuccess('Congrats! your payment completed');
-            setTransactionId(paymentIntent.id);
+        if (paymentIntent.status === 'succeeded') {
             // store payment info in the database
+            const payment = {
+                price,
+                transactionId: paymentIntent.id,
+                email,
+                bookingId: _id,
+            }
+            fetch('http://localhost:5000/payments', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(payment)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        setSuccess('Congrats! your payment completed');
+                        setTransactionId(paymentIntent.id);
+                    }
+                })
         }
         setProcessing(false);
 
